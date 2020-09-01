@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.owner;
 
+import javassist.tools.rmi.Sample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.visit.VisitRepository;
 import org.springframework.stereotype.Controller;
@@ -41,10 +42,32 @@ import java.util.Map;
 class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
-	@Autowired
+
 	private final OwnerRepository owners;
+//	@Autowired
+//	private OwnerRepository owners;
 
 	private VisitRepository visits;
+
+
+
+	// 주입 방법1. 생성자
+//	public OwnerController(OwnerRepository clinicService, VisitRepository visits, PetRepository petRepository) {
+//		this.owners = clinicService;
+//		this.visits = visits;
+//		this.petRepository = petRepository;
+//	}
+
+	// 주입 방법2. Autowired
+//	@Autowired
+//	private PetRepository petRepository;
+
+	// 주입 방법3. Setter
+	private PetRepository petRepository;
+
+	public void setPetRepository(PetRepository petRepository) {
+		this.petRepository = petRepository;
+	}
 
 	public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
 		this.owners = clinicService;
